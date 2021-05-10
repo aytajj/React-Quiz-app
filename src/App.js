@@ -12,9 +12,42 @@ function App() {
         },
         [api]
     )
+    const [index, setIndex] = useState(0);
+    const [correct, setCorrect] = useState(0);
+
+    const next = (t) => {
+        if (index < question.length) {
+
+            setIndex(index + 1);
+
+        }
+        if (t) {
+            var correctAnswer = t.target.value
+            console.log(correctAnswer)
+            if (correctAnswer === question[index].correct_answer) {
+                setCorrect(correct + 1);
+
+            }
+        }
+
+    };
     return (
         <div>
-            <Questions question={question} />
+            {index < question.length ? (
+                <div className="question">
+                    <h1>
+                        Suallar: {index + 1}/{question.length}
+                    </h1>
+                    <Questions
+                        nextQuestion={next}
+                        answers={question[index].answers}
+                        question={question[index].question}
+                    />
+                </div>
+            ) : (
+                <h1>Dogru cavab sayi:
+                    {correct}</h1>
+            )}
         </div>
     )
 }

@@ -3,18 +3,14 @@ import Buttons from './Buttons'
 
 function Questions(props) {
     return (
-        <div>
-            {
-                props.question.map(
-                    (i) => {
-                        return (<div key={i.id}>
-                            <h1>{i.question}</h1>
-                            <Buttons answers={i.answers} correctAnswers ={i.correct_answers}/>
-                        </div>)
-                    }
-                )
-            }
+        <div >
+            <h1>{props.question}</h1>
+            { Object.entries(props.answers).map((a, b) => (
+                <Buttons answers={a[1]} value={a[0]} onChange={(e) => props.nextQuestion(e)} />
+
+            ))}
         </div>
+
     )
 }
 
